@@ -41,6 +41,15 @@ if __name__ == "__main__":
 	config1.set('DEFAULT', 'rbd_store_user', 'glance')
 	config1.set('DEFAULT', 'rbd_store_ceph_conf', '/etc/ceph/ceph.conf')
 	config1.set('DEFAULT', 'show_image_direct_url', 'True')
+	config1.remove_section('glance_store')
+	config1.add_section('glance_store')
+	config1.set('glance_store', 'stores', 'rbd')
+	config1.set('glance_store', 'default_store', 'rbd')
+	config1.set('glance_store', 'rbd_store_chunk_size', '8')
+	config1.set('glance_store', 'rbd_store_pool', 'images')
+	config1.set('glance_store', 'rbd_store_user', 'glance')
+	config1.set('glance_store', 'rbd_store_ceph_conf', '/etc/ceph/ceph.conf')
+	config1.set('glance_store', 'show_image_direct_url', 'True')
 	
 	with open('/etc/glance/glance-api.conf', 'wb') as configfile:
 		config1.write(configfile)
